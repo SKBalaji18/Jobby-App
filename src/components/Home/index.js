@@ -17,14 +17,11 @@ const Home = () => (
             Find Jobs
           </Link>
         </button>
-<<<<<<< HEAD
         <Link className="job-btn-link" to="/jobs">
           <button type="button" className="home-button">
             Find Jobs
           </button>
         </Link>
-=======
->>>>>>> 2bed345ed658b5f26ee5745c9ff7eefd75c641d5
       </div>
     </div>
   </>

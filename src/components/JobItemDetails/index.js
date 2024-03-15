@@ -30,10 +30,7 @@ class JobItemDetails extends Component {
   }
 
   updateId = id => {
-<<<<<<< HEAD
     const {activeJobDetailId} = this.state
-=======
->>>>>>> 2bed345ed658b5f26ee5745c9ff7eefd75c641d5
     this.setState({activeJobDetailId: id}, this.getJobDetails)
   }
 
@@ -150,10 +147,7 @@ class JobItemDetails extends Component {
                 </div>
               </div>
               <p className="jd-job-icon-label">{packagePerAnnum}</p>
-<<<<<<< HEAD
               <p className="jd-job-icon-label package">{packagePerAnnum}</p>
-=======
->>>>>>> 2bed345ed658b5f26ee5745c9ff7eefd75c641d5
             </div>
             <hr className="hr-jdline" />
             <div className="desc-visit-container">
