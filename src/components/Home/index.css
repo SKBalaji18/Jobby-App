@@ -1,0 +1,71 @@
+.home-bg-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/home-sm-bg.png');
+  background-size: cover;
+  background-position: center;
+  padding: 15px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.home-text-container {
+  width: 100%;
+}
+.home-head {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.home-desc {
+  font-size: 18px;
+  font-weight: 400;
+  color: #cbd5e1;
+}
+.home-button {
+  margin: 15px 0px;
+  background-color: #6366f1;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 11px 15px;
+  border: none;
+  border-radius: 12px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 760px) {
+  .home-bg-container {
+    background-image: url('https://assets.ccbp.in/frontend/react-js/home-lg-bg.png');
+    background-size: cover;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .home-head {
+    font-size: 48px;
+  }
+  .home-desc {
+    font-size: 24px;
+  }
+  .home-text-container {
+    width: 55%;
+  }
+  .home-button {
+    margin: 20px 0px;
+    background-color: #6366f1;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 11px 15px;
+    border: none;
+    border-radius: 12px;
+  }
+}
