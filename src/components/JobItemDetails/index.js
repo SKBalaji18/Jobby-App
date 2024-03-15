@@ -146,7 +146,6 @@ class JobItemDetails extends Component {
                   <p className="jd-job-icon-label">{employmentType}</p>
                 </div>
               </div>
-              <p className="jd-job-icon-label">{packagePerAnnum}</p>
               <p className="jd-job-icon-label package">{packagePerAnnum}</p>
             </div>
             <hr className="hr-jdline" />
