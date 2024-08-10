@@ -12,11 +12,6 @@ const Home = () => (
           Millions of people are searching for jobs,salary information,company
           reviews. Find the job that fits your abilities and potential.
         </p>
-        <button className="home-button">
-          <Link className="nav-link" to="/jobs">
-            Find Jobs
-          </Link>
-        </button>
         <Link className="job-btn-link" to="/jobs">
           <button type="button" className="home-button">
             Find Jobs

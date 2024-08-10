@@ -14,6 +14,29 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
+const locationList = [
+  {
+    label: 'Hyderabad',
+    locationId: 'Hyderabad',
+  },
+  {
+    label: 'Bangalore',
+    locationId: 'Bangalore',
+  },
+  {
+    label: 'Chennai',
+    locationId: 'Chennai',
+  },
+  {
+    label: 'Delhi',
+    locationId: 'Delhi',
+  },
+  {
+    label: 'Mumbai',
+    locationId: 'Mumbai',
+  },
+]
+
 const employmentTypesList = [
   {
     label: 'Full Time',
@@ -58,9 +81,10 @@ class Jobs extends Component {
     profileApiStatus: apiStatusConstants.initial,
     jobsList: [],
     jobsApiStatus: apiStatusConstants.initial,
-    checkBoxList: [],
+    empCheckBoxList: [],
     activeSalaryRange: 0,
     searchQuery: '',
+    locationCheckList: [],
   }
 
   componentDidMount() {
@@ -106,8 +130,8 @@ class Jobs extends Component {
       jobsApiStatus: apiStatusConstants.inProgress,
     })
 
-    const {checkBoxList, activeSalaryRange, searchQuery} = this.state
-    const checkboxInputs = checkBoxList.join(',')
+    const {empCheckBoxList, activeSalaryRange, searchQuery} = this.state
+    const checkboxInputs = empCheckBoxList.join(',')
     const jwtToken = Cookies.get('jwt_token')
 
     const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${checkboxInputs}&minimum_package=${activeSalaryRange}&search=${searchQuery}`
@@ -147,18 +171,36 @@ class Jobs extends Component {
     this.getProfileData()
   }
 
-  onClickCheckbox = event => {
-    const {checkBoxList} = this.state
+  onClickEmpCheckbox = event => {
+    const {empCheckBoxList} = this.state
 
-    if (checkBoxList.includes(event.target.id)) {
-      const updatedList = checkBoxList.filter(
+    if (empCheckBoxList.includes(event.target.id)) {
+      const updatedList = empCheckBoxList.filter(
         eachItem => eachItem !== event.target.id,
       )
-      this.setState({checkBoxList: updatedList}, this.getJobData)
+      this.setState({empCheckBoxList: updatedList}, this.getJobData)
     } else {
       this.setState(
         prevState => ({
-          checkBoxList: [...prevState.checkBoxList, event.target.id],
+          empCheckBoxList: [...prevState.empCheckBoxList, event.target.id],
+        }),
+        this.getJobData,
+      )
+    }
+  }
+
+  onClickLocCheckbox = event => {
+    const {locationCheckList} = this.state
+
+    if (locationCheckList.includes(event.target.id)) {
+      const updatedList = locationCheckList.filter(
+        eachItem => eachItem !== event.target.id,
+      )
+      this.setState({locationCheckList: updatedList}, this.getJobData)
+    } else {
+      this.setState(
+        prevState => ({
+          locationCheckList: [...prevState.locationCheckList, event.target.id],
         }),
         this.getJobData,
       )
@@ -190,10 +232,28 @@ class Jobs extends Component {
           <input
             className="filter-input"
             type="checkbox"
-            onChange={this.onClickCheckbox}
+            onChange={this.onClickEmpCheckbox}
             id={eachItem.employmentTypeId}
           />
           <label className="filter-label" htmlFor={eachItem.employmentTypeId}>
+            {eachItem.label}
+          </label>
+        </li>
+      ))}
+    </ul>
+  )
+
+  renderLocation = () => (
+    <ul className="emp-type-container">
+      {locationList.map(eachItem => (
+        <li key={eachItem.locationId} className="filter-list">
+          <input
+            className="filter-input"
+            type="checkbox"
+            onChange={this.onClickLocCheckbox}
+            id={eachItem.locationId}
+          />
+          <label className="filter-label" htmlFor={eachItem.locationId}>
             {eachItem.label}
           </label>
         </li>
@@ -232,6 +292,7 @@ class Jobs extends Component {
           onChange={this.onChangeSearch}
           onKeyDown={this.onEnterSearch}
         />
+        {/* eslint-disable-next-line */}
         <button
           onClick={this.onSubmitSearch}
           className="serach-btn"
@@ -290,10 +351,24 @@ class Jobs extends Component {
   }
 
   renderJobSuccess = () => {
-    const {jobsList} = this.state
+    const {jobsList, locationCheckList} = this.state
+
+    const detailsForLocation = jobsList.filter(each =>
+      locationCheckList.includes(each.location),
+    )
+
     const showTheList = jobsList.length >= 1
 
     if (showTheList) {
+      if (detailsForLocation.length >= 1) {
+        return (
+          <ul className="job-li-container">
+            {detailsForLocation.map(eachItem => (
+              <JobCard key={eachItem.id} eachJob={eachItem} />
+            ))}
+          </ul>
+        )
+      }
       return (
         <ul className="job-li-container">
           {jobsList.map(eachItem => (
@@ -381,6 +456,9 @@ class Jobs extends Component {
             <hr />
             <h1 className="filter-head">Salary Range</h1>
             {this.renderSalaryRange()}
+            <hr />
+            <h1 className="filter-head">Locations</h1>
+            {this.renderLocation()}
           </div>
           <div className="right-bar">
             <div className="lg-search-bar">{this.renderSearchBar()}</div>

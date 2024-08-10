@@ -29,6 +29,7 @@ const Header = props => {
           <ul className="nav-mobile-btn-container">
             <li className="nav-mobile-list-item">
               <Link to="/">
+                {/* eslint-disable-next-line */}
                 <button type="button" className="nav-mobile-btn">
                   <AiFillHome className="nav-mobile-icon" />
                 </button>
@@ -36,12 +37,14 @@ const Header = props => {
             </li>
             <li className="nav-mobile-list-item">
               <Link to="/jobs">
+                {/* eslint-disable-next-line */}
                 <button type="button" className="nav-mobile-btn">
                   <BsBriefcaseFill className="nav-mobile-icon" />
                 </button>
               </Link>
             </li>
             <li className="nav-mobile-list-item">
+              {/* eslint-disable-next-line */}
               <button
                 type="button"
                 className="nav-mobile-btn"
